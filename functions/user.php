@@ -55,7 +55,7 @@ function get_public_files()
             $file_rows .= "
              <tr>
                 <td>$file->name</td>
-                <td>$file->size</td>
+                <td>$file->size kb</td>
                 <td>$file->type</td>
                 <td>$file->uploaded_by</td>
                 <td>$file->date_uploaded</td>
