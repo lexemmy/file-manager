@@ -19,14 +19,14 @@
         <h5 class="my-0 mr-md-auto font-weight-normal"><a href="index.php">File Manager</a></h5>
         <nav class="my-2 my-md-0 mr-md-3">
             <a class="p-2 text-light" href="index.php">Home</a>
-            <a class="p-2 text-light" href="dashboard.php">Dashboard</a>
             <a class="p-2 text-light" href="private.php">Private Files</a>
             <?php if(!isset($_SESSION['user_id'])){ ?>
         
                 <a class="p-2 text-light" href="login.php">Login</a> 
                 <a class="p-2 text-light" href="register.php">Register</a> 
                 
-            <?php }else{ ?> 
+            <?php }else{ ?>
+                <a class="p-2 text-light" href="dashboard.php">Dashboard</a> 
                 <a class="p-2 text-light" href="logout.php">Logout</a>
             <?php } ?>
           
