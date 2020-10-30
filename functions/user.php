@@ -60,7 +60,7 @@ function get_public_files() {
             <td>".$row['size']."kb</td>
             <td>".$row['type']."</td>
             <td>".$row['uploaded_by']."</td>
-            <td>".$row['date_uploaded']."</td>
+            <td>".date_format(date_create($row['date_uploaded']), 'd/m/Y')."</td>
             <td>".$row['total_download']."</td>
             <td><a class='btn btn-success' href='download.php?file=".$row['name']."'>Download</a></td>
         </tr>
@@ -83,7 +83,7 @@ function get_private_files(){
                 <td>".$row['size']."kb</td>
                 <td>".$row['type']."</td>
                 <td>".$row['uploaded_by']."</td>
-                <td>".$row['date_uploaded']."</td>
+                <td>".date_format(date_create($row['date_uploaded']), 'd/m/Y')."</td>
                 <td>".$row['total_download']."</td>
                 <td><a class='btn btn-success' href='download.php?file=".$row['name']."'>Download</a></td>
             </tr>
@@ -108,7 +108,7 @@ function get_user_files($email)
                 <td>".$row['size']."kb</td>
                 <td>".$row['type']."</td>
                 <td>".$row['uploaded_by']."</td>
-                <td>".$row['date_uploaded']."</td>
+                <td>".date_format(date_create($row['date_uploaded']), 'd/m/Y')."</td>
                 <td>".$row['total_download']."</td>
                 <td>
                 <a class='btn btn-success' href='download.php?file=".$row['name']."'>Download</a>

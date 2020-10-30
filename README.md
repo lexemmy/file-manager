@@ -15,6 +15,6 @@ $ start local server
 
 # Load the site at localhost/
 ```
-1. Edit the db-cofig.php to add sql database detail
+1. Edit the db_config.php to edit database detail
 2. Create a file_manager database in mysql
 3. Import file_manager.sql
