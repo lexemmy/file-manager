@@ -63,7 +63,7 @@ if (! isset($_SESSION['user_id'])) { //check if user is logged in
             <div class="col-md-9">
               <div class="">
                 <label>Select File</label>
-                <input type="file" name="file" class="form-control" required="required"/> <p style="color: red">maximum: 2MB</p>
+                <input type="file" name="file" class="form-control" required="required"/> <p style="color: red">maximum: 3MB</p>
               </div>
               <div class="form-group">
                 <label>File category</label>

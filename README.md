@@ -15,4 +15,6 @@ $ start local server
 
 # Load the site at localhost/
 ```
-[live url](https://file-manager-atg.herokuapp.com)
+1. Edit the db-cofig.php to add sql database detail
+2. Create a file_manager database in mysql
+3. Import file_manager.sql

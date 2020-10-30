@@ -2,6 +2,8 @@
 session_start();
 require('functions/alert.php');
 require('functions/user.php');
+require('functions/db_config.php');
+
 
 $errorCount = 0;  //initiate error count
 
@@ -15,9 +17,7 @@ if($errorCount > 0){
         $currentUser = find_user($email); //check if user exist
         if($currentUser){
           //check the user password.
-            $userString = file_get_contents("database/users/".$currentUser->email . ".json");
-            $userObject = json_decode($userString);
-            $passwordFromDB = $userObject->password;
+            $passwordFromDB = find_user($email)['password'];
 
             $passwordFromUser = password_verify($password, $passwordFromDB);
             
@@ -25,9 +25,9 @@ if($errorCount > 0){
             if($passwordFromDB == $passwordFromUser){
                 //set sessions and redicrect to dashboard
                 
-                $_SESSION['email'] = $userObject->email;
-                $_SESSION['fullname'] = $userObject->fullname;
-                $_SESSION['user_id'] = $userObject->id;
+                $_SESSION['email'] = find_user($email)['email'];
+                $_SESSION['fullname'] = find_user($email)['fullname'];
+                $_SESSION['user_id'] = find_user($email)['id'];
                 
                 header('location: dashboard.php');
                 exit();

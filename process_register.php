@@ -1,5 +1,6 @@
 <?php session_start();
-require('functions/user.php'); 
+require('functions/user.php');
+require('functions/db_config.php'); 
     
 $errorCount = 0;   //initiate error count
 
@@ -14,7 +15,7 @@ if (!preg_match("/^[a-zA-Z]*$/",$fullname) || (strlen($fullname) < 2 ) ) {      
     $_SESSION['error'] = "*Name must be more than two characters and must contain only letters";
     $errorCount++;
     } else {
-           $first_name = test_input($_POST["first_name"]);
+           $fullname = test_input($_POST["fullname"]);
            }
 
 if (!preg_match("/^[a-zA-Z0-9\.]*@[a-z\.]{1,}[a-z]*$/",$email) || $email=='') {     //email regex check
@@ -30,23 +31,14 @@ if ($password != $confirm_password) {
     } else if ( strlen($password) < 4) {
               $_SESSION['error'] =  "*Password must be at least 4 characters"; 
               $errorCount++;
+              } else {
+                $password = password_hash($password, PASSWORD_DEFAULT);
               }
 
 
 if($errorCount > 0){
     header("Location: register.php"); //if there is an error, redirect back to register page
 } else {
-    $allusers = scandir("database/users/"); //return array
-    $countallusers = count($allusers);
-    $newUserId = $countallusers++;
-
-
-    $userObject = [                             //create user object
-                  'id'=>$newUserId,
-                  'fullname'=>$fullname,
-                  'email'=>$email,
-                  'password'=> password_hash($password, PASSWORD_DEFAULT), //password hashing 
-                  ];
 
     //Check if the user already exists.
     $userExists = find_user($email);
@@ -58,9 +50,15 @@ if($errorCount > 0){
     }
         
     //save in the database;
-    save_user($userObject);
+    if (save_user($fullname, $email, $password)) {
+      $_SESSION["message"] = "Registration Successful, you can now login " . $first_name;
+      header("Location: login.php");
+      exit();
+    } else {
+      $_SESSION["error"] = "An error occured, please try again";
+      header("Location: register.php");
+    }
 
-    $_SESSION["message"] = "Registration Successful, you can now login " . $first_name;
-    header("Location: login.php");
+
 }
 

@@ -1,9 +1,12 @@
 <?php
+require('functions/db_config.php');
 if(isset($_GET['file']))
 {
     $filename = $_GET['file'];
-    unlink("database/file_data/" . $filename . ".json");  //delete file data
-    unlink("database/files/" . $filename); //delete file
+    
+    $sql = "delete from file where name='$filename'"; //delete from database
+    $res = $conn->query($sql);
+    unlink("files/" . $filename); //delete file
     header("location: dashboard.php");
     exit();
 }
