@@ -29,7 +29,6 @@ require('functions/user.php');
                 <th scope="col">Uploaded By</th>
                 <th scope="col">Date Uploaded</th>
                 <th scope="col">Total Download</th>
-                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>

@@ -24,7 +24,6 @@ if (! isset($_SESSION['user_id'])) { //check if user is logged in
                     <th scope="col">Uploaded By</th>
                     <th scope="col">Date Uploaded</th>
                     <th scope="col">Total Download</th>
-                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>

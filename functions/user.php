@@ -21,7 +21,8 @@ function find_user($email){
 
         return $row;
     }
-      return false;  
+      return false;
+      $conn->close();  
 }
 
 //save user to database
@@ -62,11 +63,11 @@ function get_public_files() {
             <td>".$row['uploaded_by']."</td>
             <td>".date_format(date_create($row['date_uploaded']), 'd/m/Y')."</td>
             <td>".$row['total_download']."</td>
-            <td><a class='btn btn-success' href='download.php?file=".$row['name']."'>Download</a></td>
         </tr>
         ";
     } 
     return $file_rows;
+    $conn->close();
 }
 
 //get all private files
@@ -85,11 +86,11 @@ function get_private_files(){
                 <td>".$row['uploaded_by']."</td>
                 <td>".date_format(date_create($row['date_uploaded']), 'd/m/Y')."</td>
                 <td>".$row['total_download']."</td>
-                <td><a class='btn btn-success' href='download.php?file=".$row['name']."'>Download</a></td>
             </tr>
             ";
         } 
      return $file_rows;
+     $conn->close();
 }
 
 //get all user files
@@ -99,7 +100,7 @@ function get_user_files($email)
     global $conn;
     $file_rows = '';
    
-    $q="select name,size,type,total_download,uploaded_by,date_uploaded from file where email='$email'";
+    $q="select name,size,type,category,total_download,uploaded_by,date_uploaded from file where email='$email'";
     $result=$conn->query($q);
     while($row = mysqli_fetch_array($result)){
      $file_rows .= "
@@ -110,6 +111,7 @@ function get_user_files($email)
                 <td>".$row['uploaded_by']."</td>
                 <td>".date_format(date_create($row['date_uploaded']), 'd/m/Y')."</td>
                 <td>".$row['total_download']."</td>
+                <td>".$row['category']."</td>
                 <td>
                 <a class='btn btn-success' href='download.php?file=".$row['name']."'>Download</a>
                 <a class='btn btn-danger' href='delete.php?file=".$row['name']."'>Delete</a>
@@ -118,6 +120,7 @@ function get_user_files($email)
             ";
         } 
      return $file_rows;
+     $conn->close();
 }
 
 
@@ -126,5 +129,6 @@ function update_download_count($filename){
     global $conn;
     $sql = "update file set total_download = total_download + 1 where name='$filename'";
     $res=$conn->query($sql);
+    $conn->close();
 }
 

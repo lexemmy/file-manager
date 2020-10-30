@@ -6,6 +6,7 @@ if(isset($_GET['file']))
     
     $sql = "delete from file where name='$filename'"; //delete from database
     $res = $conn->query($sql);
+    $conn->close();                //close database connection
     unlink("files/" . $filename); //delete file
     header("location: dashboard.php");
     exit();
